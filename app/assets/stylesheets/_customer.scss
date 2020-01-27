@@ -1,0 +1,36 @@
+.top_bar__left{
+  height: 100%;
+  width: 400px;
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  h3{
+    font-size: 50px;
+    margin: 10px 0;
+  }
+  p{
+    padding: 3px 0;
+  }
+}
+
+.top_bar__right{
+  height: 100%;
+  width: calc(100% - 400px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .user_cars{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: red;
+    overflow: scroll;
+    .user_car{
+      height: calc(100% - 10px);
+      width: 350px;
+      background-color: blue;
+      margin: 5px 15px;
+    }
+  }
+}

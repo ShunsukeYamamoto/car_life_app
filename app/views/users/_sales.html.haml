@@ -1,3 +1,116 @@
 .contents
   .top_bar
+    .top_bar__left
+      .sales_search
+        %h1 山本 俊介 様のページ
+        %h2 エンドユーザー検索フォーム
+        %form
+          %input.text{type: "text"}
+          %input.search{type: "submit",value: "SEARCH"}
+        .sales_btn
+          %a.new_customer{href: "#"}
+            %p エンドユーザー新規登録
+          %a.logout{href: "#"}
+            %p ログアウト
+    .top_bar__right
+      .sales_events
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        %a.sales_event{href: "#"}
+          %h1.name 山田　太郎　様
+          %h1.car AMG G63
+          %p.event_name 車検
+          %p.date 2020年5月1日
+          %p.rest あと20日
+        
+        
+
   .main_contents
+    .main_contents__left
+      .sales_customer_events
+        .sales_customer_events--title
+          %h1 山田 太郎 様
+          %h1 イベント一覧
+        .sales_customer_events--button
+          %a.user_edit
+            %p ユーザー編集
+          %a.event_edit
+            %p イベント編集
+        .sales_customer_event
+          %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
+          .event--info
+            %p.name AMG SLS
+            %p.event 車検
+            %p.date 2020/5/1
+            %p.rest あと20日
+        .sales_customer_event
+          %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
+          .event--info
+            %p.name AMG SLS
+            %p.event 車検
+            %p.date 2020/5/1
+            %p.rest あと20日
+        .sales_customer_event
+          %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
+          .event--info
+            %p.name AMG SLS
+            %p.event 車検
+            %p.date 2020/5/1
+            %p.rest あと20日
+
+
+
+    .main_contents__right
+      .messages
+        .messages__opponent
+          .messages__opponent--info
+            %p.name 山本
+            %p.date 2019/2/15 13:00
+          .messages__opponent__wrapper
+            %p 車検点検の時期です！
+        .messages__self
+          %p.date 2019/2/15 14:00
+          .messages__self__wrapper
+            %p 了解です
+      .message_form
+        %form{action: "#"}
+          .text_box
+            %input.text_box--text{type: "text_area",placeholder: "メッセージを入力して下さい",name: "text"}
+            %label.text_box__icon_area
+              %input{type: "file",name: "image"}
+              = icon('fas','image')
+          %input.submit_btn{type: "submit",value: "SEND"}

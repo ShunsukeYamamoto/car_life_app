@@ -5,12 +5,59 @@
       %p.top_bar__left--store_address 東京都渋谷区道玄坂２丁目２３−１２
       %p.top_bar__left--phone 03-3333-3333
       %p.top_bar__left--sales_name 担当： 山本 俊介
+      =link_to "ログアウト",destroy_user_session_path,method: :delete,class: "logout"
+      
 
     .top_bar__right
       .user_cars
-        .user_car
-        .user_car
-        .user_car
-        
+        %a.user_car{href: "#"}
+          .user_car--image
+            %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
+          .user_car--info
+            %h3 AMG SLS
+            %p 年式： 2012年
+            %p 車検日：　2020年5月1日
+            .user_car--info--distance
+              %p.user_car--info--distance- 総走行距離： 3,500km
+              %p.user_car--info--distance (2019年3月1日　現在)
+        %a.user_car
+        %a.user_car
 
   .main_contents
+    .main_contents__left
+      .events
+        .event
+          %h2 AMG SLS
+          %p イベント名：　車検
+          .event_date
+            .date
+              %p 2020年5月1日
+            .rest
+              %p あと20日
+        
+
+
+    .main_contents__right
+      .messages
+        .messages__opponent
+          .messages__opponent--info
+            %p.name 山本
+            %p.date 2019/2/15 13:00
+          .messages__opponent__wrapper
+            %p 車検点検の時期です！
+
+        .messages__self
+          %p.date 2019/2/15 14:00
+          .messages__self__wrapper
+            %p 了解です
+        
+            
+
+      .message_form
+        %form{action: "#"}
+          .text_box
+            %input.text_box--text{type: "text_area",placeholder: "メッセージを入力して下さい",name: "text"}
+            %label.text_box__icon_area
+              %input{type: "file",name: "image"}
+              = icon('fas','image')
+          %input.submit_btn{type: "submit",value: "SEND"}

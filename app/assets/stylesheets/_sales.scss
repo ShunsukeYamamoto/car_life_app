@@ -1,0 +1,124 @@
+.sales_search{
+  width: 100%;
+  height: 100%;
+  color: rgba(255,255,255,0.7);
+  padding-top: 20px;
+  box-sizing: border-box;
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    margin-top: 15px;
+  }
+  form{
+    padding-bottom: 20px;
+    
+    .text{
+      box-sizing: border-box;
+      border-style: none;
+      width: 250px;
+      height: 30px;
+      border-radius: 10px;
+      outline: none;
+      padding: 0 15px;
+      margin-right: 10px;
+    }
+    .search{
+      border-style: none;
+      height: 30px;
+      width: 80px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  }
+  .new_customer{
+    display: inline-block;
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    background-color:rgba(73, 106, 214, 0.7);
+    padding: 5px 20px;
+    border-radius: 10px;
+  }
+  .logout{
+    display: inline-block;
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    background-color:rgba(216, 65, 38, 0.966);
+    padding: 5px 20px;
+    border-radius: 10px;
+    margin-left: 7px;
+  }
+}
+
+.sales_events{
+  width: 100%;
+  height: 100%;
+  padding: 15px 0 15px 15px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: scroll;
+  .sales_event{
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    margin-right: 15px;
+    background-color:rgba(0,6,18,0.3);
+    padding: 15px;
+    box-sizing: border-box;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    h1{
+      text-align: center;
+      font-size: 20px;
+    }
+    p{
+      margin-top: 10px;
+      font-size: 15px;
+    }
+  }
+}
+
+.sales_customer_events{
+  width: 350px;
+  height: 100%;
+  color: rgba(255,255,255,0.7);
+  overflow: scroll;
+  &--title{
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0;
+  }
+  &--button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    .user_edit{
+      background-color: green;
+      border-radius: 10px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    .event_edit{
+      background-color: blue;
+      border-radius: 10px;
+      padding: 5px;
+    }
+  }
+  .sales_customer_event{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color:rgba(0,6,18,0.3);
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    img{
+      width: 130px;
+      height: 100px;
+    }
+  }
+}

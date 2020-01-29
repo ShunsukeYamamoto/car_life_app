@@ -15,13 +15,11 @@ body{
     .top_bar{
       height: 230px;
       width: 100%;
-      border-bottom: solid 1px white;
       display: flex;
     }
     .main_contents{
       height: calc(100% - 230px);
       width: 100%;
-      
     }
   }
 }

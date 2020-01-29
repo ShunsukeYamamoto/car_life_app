@@ -10,7 +10,7 @@
       = f.email_field :email, autofocus: true, autocomplete: "email",class: "form form_email",placeholder: "Eメールアドレス"
     .field
       %br/
-      = f.password_field :password, autocomplete: "new-password",class: "form form_password",placeholder: "パスワード(6文字まで)"
+      = f.password_field :password, autocomplete: "new-password",class: "form form_password",placeholder: "パスワード(6文字以上)"
     .field
       %br/
       = f.password_field :password_confirmation, autocomplete: "new-password",class: "form form_password_confirmation",placeholder: "パスワード確認"

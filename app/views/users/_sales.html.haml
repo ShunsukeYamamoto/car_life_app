@@ -8,10 +8,8 @@
           %input.text{type: "text"}
           %input.search{type: "submit",value: "SEARCH"}
         .sales_btn
-          %a.new_customer{href: "#"}
-            %p エンドユーザー新規登録
-          %a.logout{href: "#"}
-            %p ログアウト
+          =link_to "エンドユーザー新規登録","#",class: "new_customer"
+          =link_to "ログアウト",destroy_user_session_path,method: :delete,class: "logout"
     .top_bar__right
       .sales_events
         %a.sales_event{href: "#"}
@@ -66,10 +64,12 @@
           %h1 山田 太郎 様
           %h1 イベント一覧
         .sales_customer_events--button
-          %a.user_edit
+          %a.user_edit{href: "#"}
             %p ユーザー編集
-          %a.event_edit
-            %p イベント編集
+          %a.event_add{href: "#"}
+            %p イベント追加
+          %a.car_add{href: "#"}
+            %p 車両追加
         .sales_customer_event
           %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
           .event--info
@@ -77,21 +77,12 @@
             %p.event 車検
             %p.date 2020/5/1
             %p.rest あと20日
-        .sales_customer_event
-          %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
-          .event--info
-            %p.name AMG SLS
-            %p.event 車検
-            %p.date 2020/5/1
-            %p.rest あと20日
-        .sales_customer_event
-          %img{src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg"}
-          .event--info
-            %p.name AMG SLS
-            %p.event 車検
-            %p.date 2020/5/1
-            %p.rest あと20日
-
+            .event_btn
+              %a.event_edit{href: "#"}
+                %p 編集
+              %a.event_delete{href: "#"}
+                %p 削除
+        
 
 
     .main_contents__right

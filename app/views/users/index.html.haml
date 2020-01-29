@@ -1,2 +1,4 @@
-= render 'customer'
--# = render 'sales'
+- if current_user.admin?
+  = render 'sales'
+-else
+  = render 'customer'

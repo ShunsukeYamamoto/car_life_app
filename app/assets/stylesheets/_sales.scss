@@ -99,11 +99,23 @@
       border-radius: 10px;
       padding: 5px;
       margin-right: 10px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
     }
-    .event_edit{
+    .event_add{
       background-color: blue;
       border-radius: 10px;
       padding: 5px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+    }
+    .car_add{
+      background-color: gray;
+      border-radius: 10px;
+      padding: 5px;
+      text-decoration: none;
+      margin-left: 10px;
+      color: rgba(255,255,255,0.7);
     }
   }
   .sales_customer_event{
@@ -119,6 +131,24 @@
     img{
       width: 130px;
       height: 100px;
+    }
+    .event_btn{
+      display: flex;
+      .event_edit{
+        background-color: green;
+        border-radius: 10px;
+        padding: 5px 8px;
+        text-decoration: none;
+        color: rgba(255,255,255,0.7);
+        margin-right: 10px;
+      }
+      .event_delete{
+        background-color:rgba(216, 65, 38, 0.966);
+        border-radius: 10px;
+        padding: 5px 8px;
+        text-decoration: none;
+        color: rgba(255,255,255,0.7);
+      }
     }
   }
 }

@@ -2,10 +2,8 @@
   %h2.form_title ログイン画面
   = form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "form_head"}) do |f|
     .field
-      %br/
       = f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "Eメールアドレス",class: "form form_email"
     .field
-      %br/
       = f.password_field :password, autocomplete: "current-password",placeholder: "パスワード(6文字以上)",class: "form form_password"
     -# - if devise_mapping.rememberable?
     -#   .field

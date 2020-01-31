@@ -10,7 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_27_053109) do
+ActiveRecord::Schema.define(version: 2020_01_30_014954) do
+
+  create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.date "inspection_date", null: false
+    t.string "image", null: false
+    t.integer "model_year", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "distance", null: false
+    t.index ["user_id"], name: "index_cars_on_user_id"
+  end
+
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "sales_id", null: false
+    t.string "title", null: false
+    t.date "date", null: false
+    t.bigint "car_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_events_on_car_id"
+    t.index ["customer_id"], name: "index_events_on_customer_id"
+    t.index ["sales_id"], name: "index_events_on_sales_id"
+  end
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "sales_id", null: false
+    t.text "text"
+    t.string "image"
+    t.bigint "car_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "talker_id"
+    t.index ["car_id"], name: "index_messages_on_car_id"
+    t.index ["customer_id"], name: "index_messages_on_customer_id"
+    t.index ["event_id"], name: "index_messages_on_event_id"
+    t.index ["sales_id"], name: "index_messages_on_sales_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -27,4 +68,12 @@ ActiveRecord::Schema.define(version: 2020_01_27_053109) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cars", "users"
+  add_foreign_key "events", "cars"
+  add_foreign_key "events", "users", column: "customer_id"
+  add_foreign_key "events", "users", column: "sales_id"
+  add_foreign_key "messages", "cars"
+  add_foreign_key "messages", "events"
+  add_foreign_key "messages", "users", column: "customer_id"
+  add_foreign_key "messages", "users", column: "sales_id"
 end

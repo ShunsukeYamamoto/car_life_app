@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 body{
   height: 100vh;
   width: 100vw;
@@ -8,6 +11,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   .contents{
     background-color:rgba(0,6,18,0.5);
     width: 97%;
@@ -22,5 +26,12 @@ body{
       width: 100%;
     }
   }
+  .edit_page{
+    z-index: 2;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color:rgba(0,6,18,0.7);
+    display: none;
+  }
 }
-

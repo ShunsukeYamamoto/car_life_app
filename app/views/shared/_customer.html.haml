@@ -1,0 +1,79 @@
+.contents
+  .top_bar
+    .top_bar__left
+      %h3.top_bar__left--store_name YAMAMOTO Motors
+      %p.top_bar__left--store_address 東京都渋谷区道玄坂２丁目２３−１２
+      %p.top_bar__left--phone 03-3333-3333
+      -# %p.top_bar__left--sales_name 担当： 山本 俊介
+      =link_to "ログアウト",destroy_user_session_path,method: :delete,class: "logout"
+      
+
+    .top_bar__right
+      .user_cars
+        - @cars.each do |car|
+          .user_car
+            .user_car--image
+              %img{src: "#{car.image}"}
+            .user_car--info
+              %h3 #{car.name}
+              %p 年式： #{car.model_year}
+              %p 車検日：　#{car.inspection_date.strftime("%Y年%-m月%-d日")}
+              .user_car--info--distance
+                %p.user_car--info--distance- 総走行距離： #{car.distance}km
+                %p.user_car--info--distance (#{car.updated_at.strftime("%Y年%-m月%-d日")}　現在)
+
+  .main_contents
+    .main_contents__left
+      .events
+        - @customer_events.each do |event|
+          %a.event{href: "/events/#{event.id}/messages"}
+            %h2 #{event.car.name}
+            %p イベント名：　#{event.title}
+            .event_date
+              .date
+                %p #{event.date.strftime("%Y年%-m月%-d日")}
+              .rest
+                %p あと#{ (event.date - Date.today).numerator}日
+        
+
+
+    .main_contents__right
+      .messages
+        -@messages.each do |message|
+          -if message.talker_id == current_user.id
+            - if message.image.present?
+              .messages__self
+                %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
+                .messages__self__wrapper
+                  %p #{message.text}
+                  = image_tag message.image.url
+            - else
+              .messages__self
+                %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
+                .messages__self__wrapper
+                  %p #{message.text}              
+          - else
+            - if message.image.present?
+              .messages__opponent
+                .messages__opponent--info
+                  %p.name #{message.sales.name}
+                  %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
+                .messages__opponent__wrapper
+                  %p #{message.text}
+                  = image_tag message.image.url            
+            - else
+              .messages__opponent
+                .messages__opponent--info
+                  %p.name #{message.sales.name}
+                  %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
+                .messages__opponent__wrapper
+                  %p #{message.text}
+              
+      .message_form
+        = form_with model: [@event,@message] ,local: true do |f|
+          .text_box
+            = f.text_field :text ,placeholder: "メッセージを入力してください",class: "text_box--text"
+            = f.label :image,class: "text_box__icon_area" do
+              = f.file_field :image
+              = icon('fas','image')
+          = f.submit "SEND",class: "submit_btn"

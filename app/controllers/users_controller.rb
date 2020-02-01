@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       @messages = @event.messages.order(created_at: 'ASC')
       @message = Message.new
       @car = Car.new
+      @event_create = Event.new
     elsif 
       @customer_events = Event.where(customer_id: current_user.id).order(date: "ASC")
       @cars = current_user.cars.order(created_at: 'ASC')

@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
       @messages = @event.messages.order(created_at: 'ASC')
       @message = Message.new
       @customer = @event.customer
-      @events = Event.where(customer_id: customer.id)
+      @events = Event.where(customer_id: @customer.id)
       @car = Car.new
     elsif 
       @customer_events = Event.where(customer_id: current_user.id).order(date: "ASC")

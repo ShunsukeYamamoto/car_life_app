@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function() {
 
   $('.close_icon').on('cloick',function(e){
     e.preventDefault();
-    $('.edit_page').fadeOut();
+    $('.edit_page').hide();
   })
 
   $fileField = $('.file_upload')

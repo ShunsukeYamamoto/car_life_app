@@ -37,7 +37,7 @@
             %p 保有車両追加
         - @events.each do |event|
           .sales_customer_event
-            = image_tag event.car.image
+            = image_tag event.car.image.url
             .event--info
               %p.name #{event.car.name}
               %p.event #{event.title}
@@ -70,7 +70,7 @@
             - if message.image.present?
               .messages__opponent
                 .messages__opponent--info
-                  %p.name #{message.customer.name}
+                  %p.name #{message.customer.name} 様
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                 .messages__opponent__wrapper
                   %p #{message.text}
@@ -94,7 +94,7 @@
           = f.submit "SEND",class: "submit_btn"
   
 .edit_page
-  .car_add_wrapper
+  .edit_wrapper
     %h2.form_title #{@customer.name} 様 車両登録
 
     = form_with model: [@customer,@car],html: {class: "form_head"},local: true do |f|
@@ -109,8 +109,6 @@
             %p 車検日
       .field
         = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)"
-
-
       .field
         = f.label :image do
           = f.file_field :image,class: "file_upload"
@@ -119,7 +117,6 @@
               = image_tag(@car.image)
             - else
               =icon('fas','image')
-
       .actions
         = f.submit "車両登録",class: "form_btn"
     %a.close_icon{href: "#","dara-turbolinks": false}

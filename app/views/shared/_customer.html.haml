@@ -4,7 +4,7 @@
       %h3.top_bar__left--store_name YAMAMOTO Motors
       %p.top_bar__left--store_address 東京都渋谷区道玄坂２丁目２３−１２
       %p.top_bar__left--phone 03-3333-3333
-      -# %p.top_bar__left--sales_name 担当： 山本 俊介
+      %a.request{href: "#"} 作業依頼
       =link_to "ログアウト",destroy_user_session_path,method: :delete,class: "logout"
       
 
@@ -77,3 +77,25 @@
               = f.file_field :image
               = icon('fas','image')
           = f.submit "SEND",class: "submit_btn"
+
+.edit_page
+  .edit_wrapper
+    %h2.form_title #{@event.car.name} 作業依頼
+
+    = form_with model: @event_create,html: {class: "form_head"},local: true do |f|
+      .field
+        = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名"
+      .field
+        = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980"
+      .field.inspection_date
+        = f.label :inspection_date,class: "inspection_date--label" do
+          = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
+          .inspection_title
+            %p 車検日
+      .field
+        = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)"
+      
+      .actions
+        = f.submit "車両登録",class: "form_btn"
+    %a.close_icon{href: "#","dara-turbolinks": false}
+      =icon('far','window-close')

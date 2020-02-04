@@ -1,13 +1,24 @@
-$(document).on('turbolinks:load', function() { 
+$(function() { 
 
   $('.car_add').on('click',function(e){
     e.preventDefault();
     $('.edit_page').fadeIn();
   })
 
-  $('.close_icon').on('cloick',function(e){
+  $('.event_add').on('click',function(e){
+    e.preventDefault();
+    $('.edit_event').fadeIn();
+  })
+
+  $('.event_edit').on('click',function(){
+    $(this).next('.edit_car_page').fadeIn();
+  })
+
+  $('.close_icon').on('click',function(e){
     e.preventDefault();
     $('.edit_page').hide();
+    $('.edit_event').hide();
+    $('.edit_car_page').hide();
   })
 
   $fileField = $('.file_upload')
@@ -30,4 +41,8 @@ $(document).on('turbolinks:load', function() {
     })(file);
     reader.readAsDataURL(file);
   })
+
+  
+
+  
 });

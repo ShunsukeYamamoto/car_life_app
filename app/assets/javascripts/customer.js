@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(function(){
 
   $('.request').on('click',function(e){
     e.preventDefault();

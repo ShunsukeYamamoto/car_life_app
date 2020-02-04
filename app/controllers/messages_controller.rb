@@ -1,7 +1,14 @@
 class MessagesController < ApplicationController
   def create
-    message = Message.create(message_params)
-    redirect_to event_messages_path(message.event.id)
+    @message = Message.new(message_params)
+    if @message.save
+      # binding.pry
+      respond_to do |format|
+        format.json
+      end
+    else
+      redirect_to event_messages_path(@message.event.id)
+    end
   end
 
   def index
@@ -13,12 +20,14 @@ class MessagesController < ApplicationController
       @customer = @event.customer
       @events = Event.where(customer_id: @customer.id)
       @car = Car.new
+      @cars = @customer.cars
     elsif 
       @customer_events = Event.where(customer_id: current_user.id).order(date: "ASC")
       @cars = current_user.cars.order(created_at: 'ASC')
       @event = Event.find(params[:event_id])
       @messages = @event.messages.order(created_at: 'ASC')
       @message = Message.new
+      @event_create = Event.new
     end
   end
 

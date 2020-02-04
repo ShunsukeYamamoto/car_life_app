@@ -3,9 +3,16 @@ Rails.application.routes.draw do
   root "users#index"
   devise_for :users
   resources :users,only: :index do
-    resources :cars,only: :create
+    collection do
+      get 'search_page'
+    end
+    member do
+      get 'search_page_index'
+    end
+    resources :cars,only: [:create,:update]
   end
-  resources :events,only: [:index,:destroy] do
+  resources :events,only: [:index,:destroy,:create] do
     resources :messages,only: [:index,:show,:create]
+    
   end
 end

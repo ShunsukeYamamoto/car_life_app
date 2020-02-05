@@ -30,73 +30,76 @@
     .main_contents__left
       .sales_customer_events
         .sales_customer_events--title
-          -if @event.present?
-            %h1 #{@event.customer.name} 様
-          -else
-            %h1 #{@customer.name} 様
-            %h1 まだイベントがありません
+          -if @customer.present?
+            -if @event.present? 
+              %h1 #{@event.customer.name} 様
+            -else
+              %h1 #{@customer.name} 様
+              %h1 まだイベントがありません
+
 
         .sales_customer_events--button
-          -# %a.user_edit{href: "#"}
-          -#   %p ユーザー編集
-          -if @customer.cars.present?
-            %a.event_add{href: "#"}
-              %p イベント追加
-          %a.car_add{href: "#","dara-turbolinks": false }
-            %p 保有車両追加
+          -if @customer.present?
+            -if @customer.cars.present?
+              %a.event_add{href: "#"}
+                %p イベント追加
+            %a.car_add{href: "#","dara-turbolinks": false }
+              %p 保有車両追加
         
         .sales_customer_events__cars
           %h1 保有車両一覧
           .sales_customer_events__cars__index
-            -@cars.each do |car|
-              .sales_customer_event
-                = image_tag car.image.url
-                .event--info
-                  %p #{car.name}
-                  %p 車検日
-                  %p #{car.inspection_date.strftime('%Y年%-m月%-d日')}
-                  %p 走行距離:#{car.distance} km
-                  .event_edit
-                    %p 車両編集
-                  .edit_car_page
-                    .edit_wrapper
-                      %h2.form_title #{@customer.name} 様 車両情報編集
-                      = form_with model: [@customer,car],html: {class: "form_head"},local: true do |f|
-                        .field
-                          = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名"
-                        .field
-                          = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980"
-                        .field.inspection_date
-                          = f.label :inspection_date,class: "inspection_date--label" do
-                            = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
-                            .inspection_title
-                              %p 車検日
-                        .field
-                          = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)"
-                        .field
-                          = f.label :image do
-                            = f.file_field :image,class: "file_upload"
-                            .image_display
-                              - if car.image.present?
-                                = image_tag(car.image.url)
-                              - else
-                                =icon('fas','image')
-                        .actions
-                          = f.submit "車両登録",class: "form_btn"
-                      %a.close_icon{href: "#"}
-                        =icon('far','window-close')
+            -if @cars.present?
+              -@cars.each do |car|
+                .sales_customer_event
+                  = image_tag car.image.url
+                  .event--info
+                    %p #{car.name}
+                    %p 車検日
+                    %p #{car.inspection_date.strftime('%Y年%-m月%-d日')}
+                    %p 走行距離:#{car.distance} km
+                    .event_edit
+                      %p 車両編集
+                    .edit_car_page
+                      .edit_wrapper
+                        %h2.form_title #{@customer.name} 様 車両情報編集
+                        = form_with model: [@customer,car],html: {class: "form_head",id: "car_edit_#{car.id}"},local: true do |f|
+                          .field
+                            = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名",id: "car_name_#{car.id}"
+                          .field
+                            = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980",id: "car_model_year_#{car.id}"
+                          .field.inspection_date
+                            = f.label :inspection_date,class: "inspection_date--label" do
+                              = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date",id: "car_inspection_date_#{car.id}"
+                              .inspection_title
+                                %p 車検日
+                          .field
+                            = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)",id: "car_distance_#{car.id}"
+                          .field
+                            = f.label :image do
+                              = f.file_field :image,class: "file_upload",id: "car_image_#{car.id}"
+                              .image_display
+                                - if car.image.present?
+                                  = image_tag(car.image.url)
+                                - else
+                                  =icon('fas','image')
+                          .actions
+                            = f.submit "車両登録",class: "form_btn"
+                        %a.close_icon{href: "#"}
+                          =icon('far','window-close')
 
         %h1.event_title イベント一覧
-        - @events.each do |event|
-          .sales_customer_event
-            = image_tag event.car.image.url
-            .event--info
-              %p.name #{event.car.name}
-              %p.event #{event.title}
-              %p.date #{event.date.strftime{"%Y年%-m月%-d日"}}
-              %p.rest あと#{ (event.date - Date.today).numerator}日
-              .event_btn
-                = link_to "イベント削除",event_path(event),method: :delete,class: "event_delete"
+        - if @events.present?
+          - @events.each do |event|
+            .sales_customer_event
+              = image_tag event.car.image.url
+              .event--info
+                %p.name #{event.car.name}
+                %p.event #{event.title}
+                %p.date #{event.date.strftime{"%Y年%-m月%-d日"}}
+                %p.rest あと#{ (event.date - Date.today).numerator}日
+                .event_btn
+                  = link_to "イベント削除",event_path(event),method: :delete,class: "event_delete"
           
           
     .main_contents__right
@@ -106,20 +109,20 @@
 
             -if message.talker_id == current_user.id
               - if message.image.present?
-                .messages__self
+                .messages__self.message_sales{data: {message: {id: message.id}}}
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__self__wrapper
                     %p #{message.text}
                     = image_tag message.image.url
               - else
-                .messages__self
+                .messages__self.message_sales{data: {message: {id: message.id}}}
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__self__wrapper
                     %p #{message.text}     
 
             - else
               - if message.image.present?
-                .messages__opponent
+                .messages__opponent.message_sales{data: {message: {id: message.id}}}
                   .messages__opponent--info
                     %p.name #{message.customer.name} 様
                     %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
@@ -127,7 +130,7 @@
                     %p #{message.text}
                     = image_tag message.image.url
               - else
-                .messages__opponent
+                .messages__opponent.message_sales{data: {message: {id: message.id}}}
                   .messages__opponent--info
                     %p.name #{message.customer.name} 様
                     %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
@@ -143,54 +146,54 @@
                 = f.file_field :image
                 = icon('fas','image')
             = f.submit "SEND",class: "submit_btn"
-  
-.edit_page
-  .edit_wrapper
-    %h2.form_title #{@customer.name} 様 車両登録
-    = form_with model: [@customer,@car],html: {class: "form_head"},local: true do |f|
-      .field
-        = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名"
-      .field
-        = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980"
-      .field.inspection_date
-        = f.label :inspection_date,class: "inspection_date--label" do
-          = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
-          .inspection_title
-            %p 車検日
-      .field
-        = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)"
-      .field
-        = f.label :image do
-          = f.file_field :image,class: "file_upload"
-          .image_display
-            - if @car.image.present?
-              = image_tag(@car.image)
-            - else
-              =icon('fas','image')
-      .actions
-        = f.submit "車両登録",class: "form_btn"
-    %a.close_icon{href: "#","dara-turbolinks": false}
-      =icon('far','window-close')
+-if @customer.present?
+  .edit_page
+    .edit_wrapper
+      %h2.form_title #{@customer.name} 様 車両登録
+      = form_with model: [@customer,@car],html: {class: "form_head"},local: true do |f|
+        .field
+          = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名"
+        .field
+          = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980"
+        .field.inspection_date
+          = f.label :inspection_date,class: "inspection_date--label" do
+            = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
+            .inspection_title
+              %p 車検日
+        .field
+          = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)"
+        .field
+          = f.label :image do
+            = f.file_field :image,class: "file_upload"
+            .image_display
+              - if @car.image.present?
+                = image_tag(@car.image)
+              - else
+                =icon('fas','image')
+        .actions
+          = f.submit "車両登録",class: "form_btn"
+      %a.close_icon{href: "#","dara-turbolinks": false}
+        =icon('far','window-close')
 
-.edit_event
-  .edit_wrapper
-    %h2.form_title #{@customer.name} 様 イベント作成ページ
-
-    = form_with model: Event.new,html: {class: "form_head"},local: true do |f|
-      .car_field
-        -@cars.each do |car|
-          = f.label :car_id,{for: "event_car_id_#{car.id}"} do
-            = f.radio_button :car_id,"#{car.id}",class: "radio_btn"
-            .car_field--name
-              %h1 #{car.name}
-      .field
-        = f.text_field :title, autofocus: true, autocomplete: "off",class: "form",placeholder: "作業内容"
-      .field.inspection_date
-        = f.label :date,class: "inspection_date--label" do
-          = f.date_field  :date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
-          .inspection_title
-            %p 来店日
-      .actions
-        = f.submit "イベント作成",class: "form_btn"
-    %a.close_icon{href: "#","dara-turbolinks": false}
-      =icon('far','window-close')
+-if @customer.present?
+  .edit_event
+    .edit_wrapper
+      %h2.form_title #{@customer.name} 様 イベント作成ページ
+      = form_with model: Event.new,html: {class: "form_head"},local: true do |f|
+        .car_field
+          -@cars.each do |car|
+            = f.label :car_id,{for: "event_car_id_#{car.id}"} do
+              = f.radio_button :car_id,"#{car.id}",class: "radio_btn"
+              .car_field--name
+                %h1 #{car.name}
+        .field
+          = f.text_field :title, autofocus: true, autocomplete: "off",class: "form",placeholder: "作業内容"
+        .field.inspection_date
+          = f.label :date,class: "inspection_date--label" do
+            = f.date_field  :date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
+            .inspection_title
+              %p 来店日
+        .actions
+          = f.submit "イベント作成",class: "form_btn"
+      %a.close_icon{href: "#","dara-turbolinks": false}
+        =icon('far','window-close')

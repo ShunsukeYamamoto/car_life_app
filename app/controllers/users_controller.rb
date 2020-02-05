@@ -11,13 +11,15 @@ class UsersController < ApplicationController
       @event_create = Event.new
       @sales_events = Event.where(sales_id: current_user.id)
       @event = @sales_events.first
-      @customer = @event.customer
-      @events = Event.where(customer_id: @event.customer.id)
-      @messages = @event.messages.order(created_at: 'ASC')
+      if @event.present?
+        @customer = @event.customer
+        @events = Event.where(customer_id: @event.customer.id)
+        @messages = @event.messages.order(created_at: 'ASC')
+        @cars = @customer.cars
+      end
       @message = Message.new
       @car = Car.new
-      @cars = @customer.cars
-    elsif 
+    else
       @customer_events = Event.where(customer_id: current_user.id).order(date: "ASC")
       @sales = User.find(current_user.sales_id)
       @cars = current_user.cars.order(created_at: 'ASC')

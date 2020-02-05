@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
       @events = Event.where(customer_id: @customer.id)
       @car = Car.new
       @cars = @customer.cars
-    elsif 
+    else
       @customer_events = Event.where(customer_id: current_user.id).order(date: "ASC")
       @cars = current_user.cars.order(created_at: 'ASC')
       @event = Event.find(params[:event_id])
@@ -30,6 +30,20 @@ class MessagesController < ApplicationController
       @event_create = Event.new
     end
   end
+
+  def auto_update_sales
+    event = Event.find(params[:event_id])
+    message_id = params[:message_id].to_i
+    @messages = event.messages.where("id > #{message_id}")
+    @customer = event.customer
+  end
+
+  def auto_update_customer
+    event = Event.find(params[:event_id])
+    message_id = params[:message_id].to_i
+    @messages = event.messages.where("id > #{message_id}")
+  end
+
 
   private
 

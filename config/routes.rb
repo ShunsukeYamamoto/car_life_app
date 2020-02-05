@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     resources :cars,only: [:create,:update]
   end
   resources :events,only: [:index,:destroy,:create] do
-    resources :messages,only: [:index,:show,:create]
-    
+    resources :messages,only: [:index,:show,:create] do
+      collection do
+        get 'auto_update_sales'
+        get 'auto_update_customer'
+      end
+    end
   end
 end

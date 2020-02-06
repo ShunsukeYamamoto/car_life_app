@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       @sales = User.find(current_user.sales_id)
       @cars = current_user.cars.order(created_at: 'ASC')
       if @customer_events.present?
-        @messages = @customer_events.first.messages.order(created_at: 'DESC')
+        @messages = @customer_events.first.messages.order(created_at: 'ASC')
       end
       @event = @customer_events.first
       @message = Message.new
@@ -39,10 +39,6 @@ class UsersController < ApplicationController
 
   def search_page_index
     @users = User.search(params[:keyword],current_user)
-      # respond_to do |format|
-      #   format.htm
-      #   format.json
-      # end
     @event_create = Event.new
     @sales_events = Event.where(sales_id: current_user.id)
     @customer = User.find(params[:id])

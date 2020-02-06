@@ -3,6 +3,5 @@ json.array @messages do |message|
   json.date message.created_at.strftime("%Y/%-m/%-d %R")
   json.text message.text
   json.image message.image.url
+  json.customer User.find(message.customer_id)
 end
-
-json.customer_name @customer.name

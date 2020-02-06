@@ -34,14 +34,15 @@ class MessagesController < ApplicationController
   def auto_update_sales
     event = Event.find(params[:event_id])
     message_id = params[:message_id].to_i
-    @messages = event.messages.where("id > #{message_id}")
-    @customer = event.customer
+    sales = User.find(event.sales_id)
+    @messages = event.messages.where("id > #{message_id}").where.not("talker_id = #{sales.id}")
   end
 
   def auto_update_customer
     event = Event.find(params[:event_id])
     message_id = params[:message_id].to_i
-    @messages = event.messages.where("id > #{message_id}")
+    customer = User.find(event.customer_id)
+    @messages = event.messages.where("id > #{message_id}").where.not("talker_id = #{customer.id}")
   end
 
 

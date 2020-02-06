@@ -43,19 +43,19 @@
           -@messages.each do |message|
             -if message.talker_id == current_user.id
               - if message.image.present?
-                .messages__self.message_customer{data: {message: {id: message.id}}}
+                .check-message.messages__self.message_customer{data: {message: {id: message.id}}}
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__self__wrapper
                     %p #{message.text}
                     = image_tag message.image.url
               - else
-                .messages__self.message_customer{data: {message: {id: message.id}}}
+                .check-message.messages__self.message_customer{data: {message: {id: message.id}}}
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__self__wrapper
                     %p #{message.text}              
             - else
               - if message.image.present?
-                .messages__opponent.message_customer{data: {message: {id: message.id}}}
+                .check-message.messages__opponent.message_customer{data: {message: {id: message.id}}}
                   .messages__opponent--info
                     %p.name #{message.sales.name}
                     %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
@@ -63,7 +63,7 @@
                     %p #{message.text}
                     = image_tag message.image.url            
               - else
-                .messages__opponent.message_customer{data: {message: {id: message.id}}}
+                .check-message.messages__opponent.message_customer{data: {message: {id: message.id}}}
                   .messages__opponent--info
                     %p.name #{message.sales.name}
                     %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}

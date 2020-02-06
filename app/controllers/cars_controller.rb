@@ -17,10 +17,18 @@ class CarsController < ApplicationController
         car.update(image: params[:car][:image])
       end
       flash[:notice] = "車両情報が更新されました"
-      redirect_to event_messages_path(car.events.first)
+      redirect_to "/users/#{car.user_id}/search_page_index"
     else
       flash[:alert] = "入力に誤りがあります"
       redirect_to event_messages_path(car.events.first)
+    end
+  end
+
+  def destroy
+    car = Car.find(params[:id])
+    if car.destroy
+      flash[:notice] = "登録車両を削除しました"
+      redirect_to search_page_index_user_path(car.user_id)
     end
   end
 

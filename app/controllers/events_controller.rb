@@ -1,9 +1,10 @@
 class EventsController < ApplicationController
   def destroy
     event = Event.find(params[:id])
+    customer = User.find(event.customer_id)
     event.destroy
     flash[:notice] = "イベントを削除しました"
-    redirect_to root_path
+    redirect_to "/users/#{customer.id}/search_page_index"
   end
 
   def create

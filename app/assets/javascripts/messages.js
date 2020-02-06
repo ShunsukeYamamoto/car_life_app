@@ -4,7 +4,7 @@ $(function(){
   // メッセージ非同期通信機能
   function appendMessage(data){
     if(data.image && data.text){
-      var html =`<div class="messages__self message_sales" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__self message_sales" data-message-id="${data.id}">
                   <p class="date">${data.date}</p>
                   <div class="messages__self__wrapper">
                     <p>${data.text}</p>
@@ -13,7 +13,7 @@ $(function(){
                 </div>`
       $('.messages').append(html);
     }else if(data.text){
-      var html =`<div class="messages__self message_sales" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__self message_sales" data-message-id="${data.id}">
                   <p class="date">${data.date}</p>
                   <div class="messages__self__wrapper">
                     <p>${data.text}</p>
@@ -21,7 +21,7 @@ $(function(){
                 </div>`
       $('.messages').append(html);
     }else if(data.image){
-      var html =`<div class="messages__self message_sales" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__self message_sales" data-message-id="${data.id}">
                   <p class="date">${data.date}</p>
                   <div class="messages__self__wrapper">
                     <p></p>
@@ -62,36 +62,36 @@ $(function(){
   function appendSales(data){
 
     if(data.image && data.text){
-      var html =`<div class="messages__opponent message_sales" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__opponent message_sales" data-message-id="${data.id}">
                   <div class="messages__opponent--info">
-                    <p class="name">${data.customer_name} 様</p>
+                    <p class="name">${data.customer.name} 様</p>
                     <p class="date">${data.date}</p>
                   </div>
                   <div class="messages__opponent__wrapper">
                     <p>${date.text}</p>
-                    <img src="${date.image}">
+                    <img src="${data.image}">
                   </div>
                 </div>`
       $('.messages').append(html);
     }else if(data.text){
-      var html =`<div class="messages__opponent message_sales" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__opponent message_sales" data-message-id="${data.id}">
                   <div class="messages__opponent--info">
-                    <p class="name">${data.customer_name}</p>
+                    <p class="name">${data.customer.name}</p>
                     <p class="date">${data.date}</p>
                   </div>
                   <div class="messages__opponent__wrapper">
-                    <p>${date.text}</p>
+                    <p>${data.text}</p>
                   </div>
                 </div>`
       $('.messages').append(html);
     }else if(data.image){
-      var html =`<div class="messages__opponent message_sales" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__opponent message_sales" data-message-id="${data.id}">
                   <div class="messages__opponent--info">
-                    <p class="name">${data.customer_name}</p>
+                    <p class="name">${data.customer.name}</p>
                     <p class="date">${data.date}</p>
                   </div>
                   <div class="messages__opponent__wrapper">
-                    <img src="${date.image}">
+                    <img src="${data.image}">
                   </div>
                 </div>`
       $('.messages').append(html);
@@ -101,7 +101,7 @@ $(function(){
 
 
   var autoUpdateMessagesSales = function(){
-    var dataId = $('.message_sales:last').data('message-id');
+    var dataId = $('.check-message:last').data('message-id');
     $.ajax({
       url: "messages/auto_update_sales",
       type: "GET",
@@ -114,6 +114,7 @@ $(function(){
           appendSales(message)
         });
       }
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight});
     })
     .fail(function(){
       alert('通信に失敗しました');
@@ -124,9 +125,9 @@ $(function(){
 
   function appendCustomer(data){
     if(data.image && data.text){
-      var html =`<div class="messages__opponent message_customer" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__opponent message_customer" data-message-id="${data.id}">
                   <div class="messages__opponent--info">
-                    <p class="name">${data.sales_name}</p>
+                    <p class="name">${data.sales.name}</p>
                     <p class="date">${data.date}</p>
                   </div>
                   <div class="messages__opponent__wrapper">
@@ -136,9 +137,9 @@ $(function(){
                 </div>`
       $('.messages').append(html)      
     }else if(data.text){
-      var html =`<div class="messages__opponent message_customer" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__opponent message_customer" data-message-id="${data.id}">
                   <div class="messages__opponent--info">
-                    <p class="name">${data.sales_name}</p>
+                    <p class="name">${data.sales.name}</p>
                     <p class="date">${data.date}</p>
                   </div>
                   <div class="messages__opponent__wrapper">
@@ -147,9 +148,9 @@ $(function(){
                 </div>`
     $('.messages').append(html)
     }else if(data.image){
-      var html =`<div class="messages__opponent message_customer" data-message-id="${data.id}">
+      var html =`<div class="check-message messages__opponent message_customer" data-message-id="${data.id}">
                   <div class="messages__opponent--info">
-                    <p class="name">${data.sales_name}</p>
+                    <p class="name">${data.sales.name}</p>
                     <p class="date">${data.date}</p>
                   </div>
                   <div class="messages__opponent__wrapper">
@@ -161,7 +162,7 @@ $(function(){
   }
 
   var autoUpdateMessagesCustomer = function(){
-    var dataId = $('.message_customer:last').data('message-id');
+    var dataId = $('.check-message:last').data('message-id');
     $.ajax({
       url: "messages/auto_update_customer",
       type: "GET",
@@ -169,9 +170,12 @@ $(function(){
       dataType: 'json'
     })
     .done(function(messages){
-      $.each(messages.array,function(i,message){
-        appendCustomer(message)
-      });
+      if (messages.array.length !== 0){
+        $.each(messages.array,function(i,message){
+          appendCustomer(message)
+        });
+      }
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight});
     })
     .fail(function(){
       alert('通信に失敗しました');
@@ -180,7 +184,7 @@ $(function(){
 
   if(document.location.href.match(/\/events\/\d\/messages/)){
     setInterval(autoUpdateMessagesSales,7000);
-    setInterval(autoUpdateMessagesCustomer,7000);
+    setInterval(autoUpdateMessagesCustomer, 7000);
   }
   
 });

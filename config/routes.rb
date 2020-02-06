@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     member do
       get 'search_page_index'
     end
-    resources :cars,only: [:create,:update]
+    resources :cars,only: [:create,:update,:destroy]
   end
   resources :events,only: [:index,:destroy,:create] do
     resources :messages,only: [:index,:show,:create] do

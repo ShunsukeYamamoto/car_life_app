@@ -185,4 +185,20 @@
   color: rgba(255,255,255,0.7);
   margin-right: 10px;
   cursor: pointer;
+  display: inline-block;
+}
+
+.delete_car{
+  width: 42%;
+  background-color: rgba(216, 65, 38, 0.966);
+  border-radius: 10px;
+  padding: 5px 8px;
+  text-decoration: none;
+  margin-right: 10px;
+  cursor: pointer;
+  float: right;
+  &--btn{
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+  }
 }

@@ -36,7 +36,13 @@ class UsersController < ApplicationController
 
   def search_page
     customer = User.search_person(params[:keyword])
-    redirect_to search_page_index_user_path(customer[0])
+    if customer[0]
+      # binding.pry
+      redirect_to search_page_index_user_path(customer[0])
+    else
+      flash[:alert] = "該当するユーザーがいません"
+      redirect_to "/users/#{params[:page_id]}/search_page_index"
+    end
   end
 
   def search_page_index

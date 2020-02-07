@@ -12,9 +12,12 @@ class EventsController < ApplicationController
     if event.save
       flash[:notice] = "作業依頼が完了しました"
       redirect_to event_messages_path(event)
-    else
+    elsif current_user.admin?
       flash[:alert] = "入力に誤りがあります"
       redirect_to "/users/#{params[:event][:user_id]}/search_page_index"
+    else
+      flash[:alert] = "入力に誤りがあります"
+      redirect_to root_path
     end
   end
 
@@ -22,7 +25,7 @@ class EventsController < ApplicationController
   private
   def event_params
     if current_user.admin?
-      if params[:car_id]
+      if params[:event][:car_id]
         car = Car.find(params[:event][:car_id])
         params.require(:event).permit(:title,:date,:car_id).merge(customer_id: car.user_id,sales_id: current_user.id)
       end

@@ -10,6 +10,8 @@
           = f.text_field :keyword,class: "text",autocomplete: "off"
           .customer_index
           = f.submit "SEARCH",class: "search"
+          - if @customer.present?
+            = f.hidden_field :page_id,value: "#{@customer.id}"
 
         .sales_btn
           =link_to "エンドユーザー新規登録","/admin",class: "new_customer"

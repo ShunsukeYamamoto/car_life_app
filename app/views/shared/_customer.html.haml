@@ -46,13 +46,13 @@
                 .check-message.messages__self.message_customer{data: {message: {id: message.id}}}
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__self__wrapper
-                    %p #{message.text}
+                    = message.text
                     = image_tag message.image.url
               - else
                 .check-message.messages__self.message_customer{data: {message: {id: message.id}}}
                   %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__self__wrapper
-                    %p #{message.text}              
+                    = message.text
             - else
               - if message.image.present?
                 .check-message.messages__opponent.message_customer{data: {message: {id: message.id}}}
@@ -60,7 +60,7 @@
                     %p.name #{message.sales.name}
                     %p.date #{message.created_at.strftime("%Y/%-m/%-d %R")}
                   .messages__opponent__wrapper
-                    %p #{message.text}
+                    = message.text
                     = image_tag message.image.url            
               - else
                 .check-message.messages__opponent.message_customer{data: {message: {id: message.id}}}

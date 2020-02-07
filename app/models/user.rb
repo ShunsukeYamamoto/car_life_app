@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def self.search_person(keyword)
-    User.where('name LIKE(?)',"%#{keyword}%").limit(1)
+    User.where('name LIKE(?)',"%#{keyword}%").where.not(admin: true).limit(1)
   end
   
 end

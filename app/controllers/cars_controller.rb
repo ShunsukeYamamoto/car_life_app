@@ -6,7 +6,7 @@ class CarsController < ApplicationController
       redirect_to search_page_index_user_path(car.user_id)
     else
       flash[:alert] = "入力に誤りがあります"
-      redirect_to event_messages_path(car.user_id)
+      redirect_to "/users/#{car.user_id}/search_page_index"
     end
   end
 

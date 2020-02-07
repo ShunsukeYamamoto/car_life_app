@@ -21,7 +21,9 @@ class UsersController < ApplicationController
       @car = Car.new
     else
       @customer_events = Event.where(customer_id: current_user.id).order(date: "ASC")
-      @sales = User.find(current_user.sales_id)
+      if current_user.sales_id.present?
+        @sales = User.find(current_user.sales_id)
+      end
       @cars = current_user.cars.order(created_at: 'ASC')
       if @customer_events.present?
         @messages = @customer_events.first.messages.order(created_at: 'ASC')

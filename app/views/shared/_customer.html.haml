@@ -39,7 +39,7 @@
 
     .main_contents__right
       .messages
-        - if @messages.present?
+        - if @messages.present? && current_user.sales_id
           -@messages.each do |message|
             -if message.talker_id == current_user.id
               - if message.image.present?

@@ -2,7 +2,8 @@
   .top_bar
     .top_bar__left
       .sales_search
-        %h1 ID:#{current_user.id} #{current_user.name} 様のページ
+        %h1 #{current_user.name} 様のページ
+        %p id番号: #{current_user.id}
         %h2 エンドユーザー検索フォーム
 
         = form_with url: search_page_users_path,method: :get,local: true do |f|
@@ -195,6 +196,7 @@
             = f.date_field  :date, autofocus: true, autocomplete: "off",class: "form form_inspection_date"
             .inspection_title
               %p 来店日
+        = f.hidden_field :user_id , value: "#{@customer.id}"
         .actions
           = f.submit "イベント作成",class: "form_btn"
       %a.close_icon{href: "#","dara-turbolinks": false}

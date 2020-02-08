@@ -137,6 +137,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     background-color:rgba(0,6,18,0.3);
     margin: 0 auto;
     margin-bottom: 20px;
@@ -145,7 +146,8 @@
     box-sizing: border-box;
     img{
       width: 130px;
-      height: 100px;
+      height: 100%;
+      max-width: 100%;
     }
     .event_btn{
       .event_delete{
@@ -196,9 +198,13 @@
   text-decoration: none;
   margin-right: 10px;
   cursor: pointer;
-  float: right;
+  // float: right;
   &--btn{
     color: rgba(255,255,255,0.7);
     text-decoration: none;
   }
+}
+
+.edit_btn__wrapper{
+  display: flex;
 }

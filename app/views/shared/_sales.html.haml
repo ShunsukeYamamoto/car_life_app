@@ -61,37 +61,38 @@
                     %p 車検日
                     %p #{car.inspection_date.strftime('%Y年%-m月%-d日')}
                     %p 走行距離:#{car.distance} km
-                    .event_edit
-                      %p 編集
-                    .edit_car_page
-                      .edit_wrapper
-                        %h2.form_title #{@customer.name} 様 車両情報編集
-                        = form_with model: [@customer,car],html: {class: "form_head",id: "car_edit_#{car.id}"},local: true do |f|
-                          .field
-                            = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名",id: "car_name_#{car.id}"
-                          .field
-                            = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980",id: "car_model_year_#{car.id}"
-                          .field.inspection_date
-                            = f.label :inspection_date,class: "inspection_date--label" do
-                              = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date",id: "car_inspection_date_#{car.id}"
-                              .inspection_title
-                                %p 車検日
-                          .field
-                            = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)",id: "car_distance_#{car.id}"
-                          .field
-                            = f.label :image do
-                              = f.file_field :image,class: "file_upload",id: "car_image_#{car.id}"
-                              .image_display
-                                - if car.image.present?
-                                  = image_tag(car.image.url)
-                                - else
-                                  =icon('fas','image')
-                          .actions
-                            = f.submit "車両登録",class: "form_btn"
-                        %a.close_icon{href: "#"}
-                          =icon('far','window-close')
-                    .delete_car
-                      = link_to "削除","/users/#{car.user_id}/cars/#{car.id}",method: :delete,class: "delete_car--btn"
+                    .edit_btn__wrapper
+                      .event_edit
+                        %p 編集
+                      .edit_car_page
+                        .edit_wrapper
+                          %h2.form_title #{@customer.name} 様 車両情報編集
+                          = form_with model: [@customer,car],html: {class: "form_head",id: "car_edit_#{car.id}"},local: true do |f|
+                            .field
+                              = f.text_field :name, autofocus: true, autocomplete: "off",class: "form",placeholder: "車名",id: "car_name_#{car.id}"
+                            .field
+                              = f.number_field :model_year, autofocus: true, autocomplete: "off",class: "form",placeholder: "年式(西暦)",min: "1980",id: "car_model_year_#{car.id}"
+                            .field.inspection_date
+                              = f.label :inspection_date,class: "inspection_date--label" do
+                                = f.date_field  :inspection_date, autofocus: true, autocomplete: "off",class: "form form_inspection_date",id: "car_inspection_date_#{car.id}"
+                                .inspection_title
+                                  %p 車検日
+                            .field
+                              = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)",id: "car_distance_#{car.id}"
+                            .field
+                              = f.label :image do
+                                = f.file_field :image,class: "file_upload",id: "car_image_#{car.id}"
+                                .image_display
+                                  - if car.image.present?
+                                    = image_tag(car.image.url)
+                                  - else
+                                    =icon('fas','image')
+                            .actions
+                              = f.submit "車両登録",class: "form_btn"
+                          %a.close_icon{href: "#"}
+                            =icon('far','window-close')
+                      .delete_car
+                        = link_to "削除","/users/#{car.user_id}/cars/#{car.id}",method: :delete,class: "delete_car--btn"
 
         %h1.event_title イベント一覧
         - if @events.present?

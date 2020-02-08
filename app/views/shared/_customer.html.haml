@@ -16,7 +16,7 @@
               %img{src: "#{car.image}"}
             .user_car--info
               %h3 #{car.name}
-              %p 年式： #{car.model_year}
+              %p 年式： #{car.model_year} 年
               %p 車検日：　#{car.inspection_date.strftime("%Y年%-m月%-d日")}
               .user_car--info--distance
                 %p.user_car--info--distance- 総走行距離： #{car.distance}km

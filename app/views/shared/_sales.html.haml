@@ -80,7 +80,7 @@
                             .field
                               = f.number_field :distance, autofocus: true, autocomplete: "off",class: "form form_distance",placeholder: "距離(km)",id: "car_distance_#{car.id}"
                             .field
-                              = f.label :image do
+                              = f.label :image,{for: "car_image_#{car.id}"} do
                                 = f.file_field :image,class: "file_upload",id: "car_image_#{car.id}"
                                 .image_display
                                   - if car.image.present?

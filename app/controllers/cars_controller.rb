@@ -12,7 +12,9 @@ class CarsController < ApplicationController
 
   def update
     car = Car.find(params[:id])
+    # binding.pry
     if car.update(car_params)
+      # binding.pry
       if params[:car][:image]
         car.update(image: params[:car][:image])
       end

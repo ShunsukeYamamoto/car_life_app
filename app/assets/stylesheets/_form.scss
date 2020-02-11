@@ -121,4 +121,10 @@
   background-color:rgba(0,6,18,0.7);
   display: none;
   cursor: default;
+  .image_display{
+    img{
+      width: unset;
+    }
+  }
 }
+

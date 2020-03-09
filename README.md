@@ -56,6 +56,11 @@
 - いち画面で機能を完結させることを目指した結果、ファットコントローラーになってしまった
 - ユーザー管理の機能に「rails_admin」を用いましたが、カスタム性に乏しく、「active_admin」の方にすればよかったと思いました。
 
+## 今後実装したい機能、改善点
+- JavaScriptのフレームワークを使って、より見易いビューを作っていきたいです
+- ユーザー管理の機能を「active_admin」に切り替えたいです
+- カレンダーを用いてスケジュール管理をする機能を実装したいです
+
 
 
 This README would normally document whatever steps are necessary to get the
